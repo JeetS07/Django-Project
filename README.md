@@ -1,0 +1,1 @@
+# A Django project with functional traditional and 2 factor authentication
