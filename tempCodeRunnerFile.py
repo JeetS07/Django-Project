@@ -1,2 +1,1 @@
 ./templates/totp.png
-#huehue
