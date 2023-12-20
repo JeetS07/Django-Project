@@ -5,7 +5,6 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib.auth import authenticate as auth
-from app1.dev.test import test
 from django.contrib import messages
 import pyotp
 import qrcode
