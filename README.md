@@ -2,7 +2,7 @@
 <div>
 Requirements:
   <ul>
-    <li>Python(build on version 3.12)</li>
+    <li>Python (build on version 3.12)</li>
     <li>
       Python libraries:
       <ul>
@@ -14,4 +14,4 @@ Requirements:
   </ul>
 </div>
 
-<h1>To run server : python manage.py runserver</h1>
+<h3>To run server : python manage.py runserver</h3>
