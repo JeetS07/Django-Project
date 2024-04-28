@@ -1,4 +1,4 @@
-# A Django web project with traditional and 2 factor authentication
+# A Django web project with 2 factor authentication
 <div>
 Requirements:
   <ul>
