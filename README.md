@@ -1,2 +1,4 @@
 # A Django web project with traditional and 2 factor authentication
-To run server type: python manage.py runserver
+Requirements: Python, Python libraries: django, pyotp, qrcode
+
+To run server : python manage.py runserver
