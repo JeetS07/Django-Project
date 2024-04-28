@@ -1,4 +1,17 @@
 # A Django web project with traditional and 2 factor authentication
-Requirements: Python(build on version 3.12), Python libraries: django, pyotp, qrcode
+<div>
+Requirements:
+  <ul>
+    <li>Python(build on version 3.12)</li>
+    <li>
+      Python libraries:
+      <ul>
+        <li>django</li>
+        <li>pyotp</li>
+        <li>qrcode</li>
+      </ul>
+    </li>
+  </ul>
+</div>
 
-To run server : python manage.py runserver
+<p>To run server : python manage.py runserver</p>
