@@ -47,7 +47,7 @@ def loginuser(request):
         if (user is not None):
             # ReCaptcha
             clientKey=request.POST['g-recaptcha-response']
-            secretKey="6Lc8BcopAAAAAJlZB1Lzb5hFk7NvKAQHCW8Zfz7E"
+            secretKey="" # Place your ReCaptcha Secret Key
             cData={
                 'secret': secretKey,
                 'response': clientKey
