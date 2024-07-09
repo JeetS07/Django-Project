@@ -96,11 +96,14 @@
         <label for="inputOtp" class="sr-only">Authentication Code</label>
         <div><b>Enter Authentication Code:</b></div>
         <input type="numericCode" id="inputOtp" name="otp" class="form-control" placeholder="Enter 6-digit code" required>
+        <div class="g-recaptcha" data-type="image" data-sitekey="6Lc8BcopAAAAAMojzsWWiEQdrXBTO3w3hR24IoSe"></div>
+        <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit"><b>Log in</b></button>
         <br>
         <a href="/signin" style="color: white;">Create New User</a>
         <p class="mt-5 mb-3 text-muted"><FONT COLOR="WHITE">&copy; Jeet</p>
     </form>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 
 </html>

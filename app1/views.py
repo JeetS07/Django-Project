@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate as auth
 from django.contrib import messages
 import pyotp
 import qrcode
-import os
+import requests
+import json
 
 
 # Create your views here.
@@ -18,7 +19,7 @@ def index(request):
     context ={
         'variable' : 'Jeet'
     }
-    return render(request, 'index.html', context)
+    return render(request, 'index.html')
 
 def about(request):
     context={
@@ -44,11 +45,26 @@ def loginuser(request):
         password=request.POST.get('password')
         user = auth(username=username, password=password)
         if (user is not None):
+            # ReCaptcha
+            clientKey=request.POST['g-recaptcha-response']
+            secretKey="6Lc8BcopAAAAAJlZB1Lzb5hFk7NvKAQHCW8Zfz7E"
+            cData={
+                'secret': secretKey,
+                'response': clientKey
+            }
+            r=requests.post('https://www.google.com/recaptcha/api/siteverify',data=cData)
+            response=json.loads(r.text)
+            bot=response['success']
+
+            # Bypassing 2FA for admin account
+            if username=="admin":
+                login(request, user)
+                return redirect("/")
         # otp verification
             otp=request.POST.get('otp')
             key=Totpkey.objects.filter(username=username)[0].key
             totp=pyotp.totp.TOTP(key)
-            if totp.verify(otp):
+            if totp.verify(otp) and bot:
                 login(request, user)
                 return redirect("/")
         else:
@@ -66,7 +82,19 @@ def signin(request):
         password1=request.POST.get('password1')
         password2=request.POST.get('password2')
         user = User.objects.filter(username=username)
-        if not(user.exists()) and password1==password2:
+
+        # reCaptcha
+        clientKey=request.POST['g-recaptcha-response']
+        secretKey="6Lc8BcopAAAAAJlZB1Lzb5hFk7NvKAQHCW8Zfz7E"
+        cData={
+            'secret': secretKey,
+            'response': clientKey
+        }
+        r=requests.post('https://www.google.com/recaptcha/api/siteverify',data=cData)
+        response=json.loads(r.text)
+        bot=response['success']
+
+        if not(user.exists()) and password1==password2 and bot:
             key=pyotp.random_base32()
             otp=pyotp.totp.TOTP(key)
             uri=otp.provisioning_uri(name=request.POST.get('username'), issuer_name='AppByJeet')
@@ -105,4 +133,3 @@ def authenticate(request):
     # else:
     #     messages.error(request, "Incorrect OTP")
     return render(request, 'authentication.html',context)
-    
